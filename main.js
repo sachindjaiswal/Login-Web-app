@@ -4,6 +4,8 @@ import user  from "./models/user.js"
 
 const myApp = express()
 
+myApp.use(express.json())
+
 try {
     const conn = mongoose.connect("mongodb://localhost:27017/myDatabase")
 } catch (error) {
@@ -22,6 +24,7 @@ myApp.post("/login",async (req,res)=>{
         password : password
     })
     await newUser.save()
+    res.send("User logined sucksexfully")
 })
 myApp.listen(3000,()=>{
     console.log("The server has started");
