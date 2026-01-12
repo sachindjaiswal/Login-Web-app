@@ -1,0 +1,23 @@
+.container{
+   border: 1cm black;
+   background: #86f4da;
+   margin-right: 80rem;
+   padding:1rem;
+   border-radius: 5px;
+   text-align: center;
+}
+
+.main{
+    display: block;
+}
+
+.main1{
+    display: block;
+}
+
+h1{
+    background: #3b3b3b;
+    border-radius: 5px;
+    color: white;
+    border: 2px black;
+}
