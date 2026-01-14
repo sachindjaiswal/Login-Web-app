@@ -5,6 +5,7 @@
    padding:1rem;
    border-radius: 5px;
    text-align: center;
+   position: relative;
 }
 
 .main{
