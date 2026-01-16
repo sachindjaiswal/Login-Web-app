@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import user  from "./models/user.js"
+import user from "./models/user.js"
 
 const myApp = express()
 
@@ -8,6 +8,7 @@ myApp.use(express.json())
 
 try {
     const conn = mongoose.connect("mongodb://localhost:27017/myDatabase")
+    console.log("Database Connected");
 } catch (error) {
     console.log("error");
 }
@@ -16,8 +17,7 @@ myApp.get("/",(req,res)=>{
 })
 
 myApp.post("/login",async (req,res)=>{
-    let username = req.body.username
-    let password = req.body.password
+    let {username , password} = req.body
 
     const newUser = new user({
         Name : username ,
