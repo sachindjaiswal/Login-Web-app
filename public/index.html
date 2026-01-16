@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Login Form</h1>
+      <div class="main">
+        <h2>Name:</h2>
+        <input type="text" placeholder="Enter your username" class="username" />
+        <div class="main1">
+          <h2>Password:</h2>
+          <input type="text" placeholder="Enter your password" class="password" />
+        </div>
+        <button class="submit">Submit Details</button>
+      </div>
+      <h2>Your details are as follows: </h2>
+      <textarea></textarea>
+      <button class="retrieve">Retrieve Credentials</button>
+    </div>
+    <script>
+        let username = document.querySelector(".username").value
+        let password = document.querySelector(".password").value
+        const formData = {
+          username : username ,
+          password : password
+        }
+        document.querySelector(".submit").addEventListener('click',async()=>{
+          await fetch("/login" ,{method:"POST" , body:formData})
+        })
+
+
+    </script>
+  </body>
+</html>

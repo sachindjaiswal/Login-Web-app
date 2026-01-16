@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import user from "./models/user.js"
 
 const myApp = express()
-
+myApp.use(express.static("public"))
 myApp.use(express.json())
 
 try {
