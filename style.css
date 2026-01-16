@@ -22,3 +22,11 @@ h1{
     color: white;
     border: 2px black;
 }
+
+button{
+    padding: 0.5rem;
+    border-radius: 5rem;
+    margin-top: 10px;
+    background-color: #747373;
+    color: white;
+}
