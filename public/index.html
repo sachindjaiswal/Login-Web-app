@@ -30,7 +30,13 @@
           password : password
         }
         document.querySelector(".submit").addEventListener('click',async()=>{
-          await fetch("/login" ,{method:"POST" , body:formData})
+                  let username = document.querySelector(".username").value
+            let password = document.querySelector(".password").value
+
+          await fetch("/login" ,{method:"POST" ,headers:{
+            "Content-Type":"application/json"
+          },
+           body:JSON.stringify(formData)})
         })
 
 
