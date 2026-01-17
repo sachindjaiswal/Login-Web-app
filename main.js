@@ -1,13 +1,16 @@
 import express from "express";
 import mongoose from "mongoose";
 import user from "./models/user.js"
+import cors from "cors";
+
 
 const myApp = express()
+myApp.use(cors());
 myApp.use(express.static("public"))
 myApp.use(express.json())
 
 try {
-    const conn = mongoose.connect("mongodb://localhost:27017/myDatabase")
+    const conn = await mongoose.connect("mongodb://localhost:27017/myDatabase")
     console.log("Database Connected");
 } catch (error) {
     console.log("error");
@@ -18,13 +21,28 @@ myApp.get("/",(req,res)=>{
 
 myApp.post("/login",async (req,res)=>{
     let {username , password} = req.body
+    const existingUser =await  user.findOne({Name : username})
+    if(existingUser){
+        console.log('The user already exits')
+        return 
+    }else{
 
     const newUser = new user({
         Name : username ,
         password : password
     })
     await newUser.save()
-    res.send("User logined sucksexfully")
+    console.log("User logined sucksexfully")
+
+}})
+
+myApp.post("/retriveUser",async (req,res)=>{
+    const {username} = req.body
+    const userDetail = await user.findOne({Name : username})
+
+    const userID = userDetail._id
+    console.log(userID);
+    
 })
 myApp.listen(3000,()=>{
     console.log("The server has started");
