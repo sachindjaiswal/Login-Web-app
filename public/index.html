@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -14,49 +14,61 @@
         <input type="text" placeholder="Enter your username" class="username" />
         <div class="main1">
           <h2>Password:</h2>
-          <input type="text" placeholder="Enter your password" class="password" />
+          <input
+            type="text"
+            placeholder="Enter your password"
+            class="password"
+          />
         </div>
         <button class="submit">Submit Details</button>
       </div>
-      <h2>Your details are as follows: </h2>
-      <textarea></textarea>
+      <h2>Your details are as follows:</h2>
+      <textarea class="output"></textarea>
       <button class="retrieve">Retrieve Credentials</button>
     </div>
     <script>
-        
-        document.querySelector(".submit").addEventListener('click',async()=>{
-            let username = document.querySelector(".username").value
-            let password = document.querySelector(".password").value
+      document.querySelector(".submit").addEventListener("click", async () => {
+        let username = document.querySelector(".username").value;
+        let password = document.querySelector(".password").value;
 
-            const formData = {
-            username : username ,
-            password : password
-        }
+        const formData = {
+          username: username,
+          password: password,
+        };
 
-          await fetch("http://localhost:3000/login" ,{method:"POST" ,headers:{
-            "Content-Type":"application/json"
+        await fetch("http://localhost:3000/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-           body:JSON.stringify(formData)})
-        })
-
-        document.querySelector(".retrieve").addEventListener('click',async()=>{
-          let username = document.querySelector(".username").value
-
-          const formData = {
-            username : username
-          }
-
-          await fetch("http://localhost:3000/retriveUser" , {method:"POST" ,headers:{
-            "Content-Type":"application/json"
-          },
-          body:JSON.stringify(formData)
+          body: JSON.stringify(formData),
         });
+      });
+      document
+        .querySelector(".retrieve")
+        .addEventListener("click", async () => {
+          const username = document.querySelector(".username").value;
 
-      
-        })
+          const response = await fetch("http://localhost:3000/retriveUser", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username }),
+          });
 
+          const data = await response.json();
 
+          const textarea = document.querySelector(".output");
+          textarea.value =
+            "Username: " +
+            data.username +
+            "\n" +
+            "Password: " +
+            data.password +
+            "\n" +
+            textarea.value;
+        });
     </script>
-    
   </body>
 </html>
